@@ -1,0 +1,124 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: Postmark
+  description: Send emails with Postmark
+  contact:
+    name: Jonathan Kosgei
+    email: jonathan@saharacluster.com
+schemes:
+  - https
+host: api.postmarkapp.com
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: X-Postmark-Server-Token
+    in: header
+paths:
+  /email:
+    post:
+      security:
+        - Bearer: []
+      summary: Send a single email
+      description: Send a single email
+      tags:
+        - "postmark"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: Email body
+          schema:
+            $ref: "#/definitions/Email"
+      responses:
+        200:
+          description: Email details
+          schema:
+            type: object
+  /email/withTemplate:
+    post:
+      security:
+        - Bearer: []
+      summary: Send an email with a template
+      description: Send an email with a template
+      tags:
+        - "postmark"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: Email with template
+          schema:
+            $ref: "#/definitions/EmailwithTemplate"
+      responses:
+        200:
+          description: Email details
+          schema:
+            type: object
+
+definitions:
+  Email:
+    properties:
+      From: 
+        type: string
+      To: 
+        type: string
+      Cc: 
+        type: string
+      Bcc: 
+        type: string
+      Subject: 
+        type: string
+      Tag: 
+        type: string
+      HtmlBody: 
+        type: string
+      TextBody: 
+        type: string
+      ReplyTo: 
+        type: string
+      TrackOpens: 
+        type: true
+      TrackLinks: 
+       type: None
+      Headers:
+        $ref: "#/definitions/EmailHeaders"
+      Attachments:
+        $ref: "#/definitions/EmailAttachments"
+  EmailHeaders:
+    properties:
+      Name: 
+        type: string
+      Value: 
+        type: string
+  EmailAttachments:
+    properties:
+      Name: 
+        type: string
+      Content: 
+        type: string
+      ContentType: 
+        type: string
+      ContentID: 
+        type: string
+  EmailwithTemplate:
+    properties:
+      TemplateId: 
+        type: integer
+      TemplateModel: 
+        type: {}
+      To: 
+        type: string
+      From: 
+        type: string
+      Bcc: 
+        type: string
+      ReplyTo: 
+        type: string
+      TrackLinks: 
+        type: None
+      TrackOpens: 
+        type: boolean
+      InlineCss: 
+        type: boolean
