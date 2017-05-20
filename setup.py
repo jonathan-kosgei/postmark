@@ -30,6 +30,7 @@ setup(
     version=VERSION,
     description="Postmark API",
     author_email="",
+    download_url = 'https://github.com/jonathan-kosgei/postmark/archive/1.0.tar.gz',
     url="",
     keywords=["Swagger", "Postmark API"],
     install_requires=REQUIRES,
